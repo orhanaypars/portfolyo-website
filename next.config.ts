@@ -2,7 +2,14 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["images.unsplash.com"], // Unsplash için izin verilen domain
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com", // Unsplash için izin verilen domain
+        port: "",
+        pathname: "/**", // Tüm yolları kapsar
+      },
+    ],
   },
 };
 

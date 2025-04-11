@@ -1,52 +1,103 @@
 "use client";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import Navbar from "./components/Navbar";
 import {
   FaGithub,
-  FaLinkedin,
-  FaTwitter,
   FaReact,
   FaHtml5,
   FaCss3,
   FaNode,
-  FaSearch,
+  FaPhone,
+  FaTools,
   FaBolt,
   FaMobileAlt,
-  FaCogs,
-  FaTools,
   FaShieldAlt,
-  FaPhone,
 } from "react-icons/fa";
 import { RiNextjsFill, RiTailwindCssFill } from "react-icons/ri";
 import { IoLogoJavascript } from "react-icons/io";
 import { SiTypescript } from "react-icons/si";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+
+interface ContactFormData {
+  name: string;
+  email: string;
+  message: string;
+}
 
 export default function Home() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactFormData>();
+
+  const onSubmit = async (data: ContactFormData) => {
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Mesaj gönderilirken bir hata oluştu.");
+      }
+
+      toast.success("Mesajınız başarıyla gönderildi!", {
+        style: {
+          backgroundColor: "#22c55e",
+          color: "#ffffff",
+        },
+      });
+    } catch (error) {
+      console.error(error);
+
+      toast.error("Mesaj gönderilemedi. Lütfen tekrar deneyin.", {
+        style: {
+          backgroundColor: "#ef4444",
+          color: "#ffffff",
+        },
+      });
+    }
+  };
+
   return (
-    <main className="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 font-poppins overflow-x-hidden">
-      <Navbar />
+    <main className="min-h-screen bg-gradient-to-b from-gray-100 via-gray-200 to-gray-300 dark:from-gray-800 dark:via-gray-900 dark:to-black text-gray-900 dark:text-gray-100 overflow-x-hidden">
       {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center h-[90vh] text-center px-6 sm:px-12 lg:px-24 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-        <h1 className="text-5xl sm:text-7xl md:text-9xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-indigo-500 dark:from-teal-300 dark:to-indigo-300 mb-8">
+      <section className="relative flex flex-col items-center justify-center h-[90vh] text-center px-6 sm:px-12 lg:px-24 bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-white">
+        {/* İçerik */}
+        <h1 className="text-5xl md:text-6xl lg:text-8xl font-semibold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-indigo-500 dark:from-[#c771c7] dark:to-[#00FFFF]">
           Aypars Çelik
           <span className="neon-line"></span>
         </h1>
-        <p className="text-xl sm:text-2xl md:text-3xl max-w-3xl mb-10 leading-relaxed text-gray-700 dark:text-gray-300">
+        <p className="text-xl sm:text-2xl md:text-3xl max-w-3xl mb-10 leading-relaxed font-light text-gray-700 dark:text-gray-300">
           Full Stack Developer | React | Next.js | Tailwind CSS
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-6">
-          <Button className="px-8 py-4 rounded-lg font-semibold text-white bg-teal-500 hover:bg-teal-600 dark:bg-teal-400 dark:hover:bg-teal-500 transition text-lg">
+          <a
+            href="https://github.com/orhanaypars"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-4 rounded-lg font-medium text-white bg-teal-500 hover:bg-teal-600 dark:bg-teal-400 dark:hover:bg-teal-500 transition text-lg flex items-center gap-2"
+          >
             GitHub <FaGithub />
-          </Button>
-          <Button className="px-8 py-4 rounded-lg font-semibold text-white bg-indigo-500 hover:bg-indigo-600 dark:bg-indigo-400 dark:hover:bg-indigo-500 transition text-lg">
-            Projeler <FaTools />
-          </Button>
-          <Button className="px-8 py-4 rounded-lg font-semibold text-white bg-blue-500 hover:bg-blue-600 dark:bg-blue-400 dark:hover:bg-blue-500 transition text-lg">
-            İletişim
-            <FaPhone />
-          </Button>
+          </a>
+          <a
+            href="#projects"
+            className="px-8 py-4 rounded-lg font-medium text-white bg-indigo-500 hover:bg-indigo-600 dark:bg-indigo-400 dark:hover:bg-indigo-500 transition text-lg flex items-center gap-2"
+          >
+            Projelerim
+            <FaTools />
+          </a>
+          <a
+            href="#contact"
+            className="px-8 py-4 rounded-lg font-medium text-white bg-blue-500 hover:bg-blue-600 dark:bg-blue-400 dark:hover:bg-blue-500 transition text-lg flex items-center gap-2"
+          >
+            İletişim <FaPhone />
+          </a>
         </div>
       </section>
 
@@ -56,18 +107,15 @@ export default function Home() {
           Hakkımda
         </h2>
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12">
-          {/* Görsel */}
           <div className="flex-shrink-0">
             <Image
-              src="https://images.unsplash.com/photo-1604964432806-254d07c11f32?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // Profil fotoğrafınızı buraya ekleyin
+              src="https://images.unsplash.com/photo-1604964432806-254d07c11f32?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Aypars Çelik"
               width={300}
               height={300}
-              className="rounded-full shadow-lg object-cover"
+              className="rounded-full shadow-2xl object-cover"
             />
           </div>
-
-          {/* Metin */}
           <div className="text-left">
             <p className="text-lg sm:text-xl leading-relaxed mb-6 text-gray-700 dark:text-gray-300">
               Merhaba, ben{" "}
@@ -75,19 +123,15 @@ export default function Home() {
                 Aypars Çelik
               </span>
               . Kullanıcı deneyimini ön planda tutan, modern web teknolojilerine
-              tutkulu bir
+              tutkulu bir{" "}
               <span className="font-bold text-teal-500 dark:text-teal-300">
-                {" "}
                 Full Stack Developer
               </span>{" "}
-              olarak çalışıyorum. React, Next.js ve Tailwind CSS gibi modern
-              araçlarla performanslı ve etkileyici arayüzler geliştiriyorum.
+              olarak çalışıyorum.
             </p>
             <p className="text-lg sm:text-xl leading-relaxed mb-6 text-gray-700 dark:text-gray-300">
               Yazılım geliştirme sürecinde, temiz kod yazmaya ve en iyi uygulama
-              standartlarını takip etmeye özen gösteriyorum. Ayrıca, takım
-              çalışmasına yatkın biriyim ve projelerde etkili iletişim kurarak
-              hedeflere ulaşmayı önemsiyorum.
+              standartlarını takip etmeye özen gösteriyorum.
             </p>
             <p className="text-lg sm:text-xl leading-relaxed text-gray-700 dark:text-gray-300">
               Boş zamanlarımda yeni teknolojiler öğrenmek, açık kaynak projelere
@@ -96,250 +140,337 @@ export default function Home() {
             </p>
           </div>
         </div>
-
-        {/* İstatistikler */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8">
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-            <h3 className="text-3xl font-bold text-indigo-500 dark:text-indigo-300">
-              2+
-            </h3>
-            <p className="text-lg text-gray-700 dark:text-gray-300">
-              Yıllık Deneyim
-            </p>
-          </div>
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-            <h3 className="text-3xl font-bold text-teal-500 dark:text-teal-300">
-              8+
-            </h3>
-            <p className="text-lg text-gray-700 dark:text-gray-300">
-              Tamamlanan Proje
-            </p>
-          </div>
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-            <h3 className="text-3xl font-bold text-blue-500 dark:text-blue-300">
-              10+
-            </h3>
-            <p className="text-lg text-gray-700 dark:text-gray-300">
-              Mutlu Müşteri
-            </p>
-          </div>
-        </div>
       </section>
 
       {/* Skills Section */}
-      <section className="max-w-6xl mx-auto py-12 px-4 text-center">
-        <h2 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-indigo-500 dark:from-teal-300 dark:to-indigo-300 mb-8">
+      <section className="max-w-6xl mx-auto py-16 px-6 sm:px-12 lg:px-24 text-center">
+        <h2 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-indigo-500 dark:from-teal-300 dark:to-indigo-300 mb-12">
           Kullandığım Teknolojiler
         </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center">
-            <FaReact className="text-4xl text-[#61DAFB]" />
-            <p className="mt-2 text-lg font-semibold">React</p>
-          </div>
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center">
-            <RiNextjsFill className="text-4xl text-black dark:text-white" />
-            <p className="mt-2 text-lg font-semibold">Next.js</p>
-          </div>
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center">
-            <RiTailwindCssFill className="text-4xl text-[#38BDF8]" />
-            <p className="mt-2 text-lg font-semibold">Tailwind CSS</p>
-          </div>
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center">
-            <IoLogoJavascript className="text-4xl text-[#F7DF1E]" />
-            <p className="mt-2 text-lg font-semibold">JavaScript</p>
-          </div>
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center">
-            <SiTypescript className="text-4xl text-[#3178C6]" />
-            <p className="mt-2 text-lg font-semibold">TypeScript</p>
-          </div>
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center">
-            <FaHtml5 className="text-4xl text-[#E34F26]" />
-            <p className="mt-2 text-lg font-semibold">HTML5</p>
-          </div>
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center">
-            <FaCss3 className="text-4xl text-[#1572B6]" />
-            <p className="mt-2 text-lg font-semibold">CSS3</p>
-          </div>
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center">
-            <FaNode className="text-4xl text-[#68A063]" />
-            <p className="mt-2 text-lg font-semibold">Node.js</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Avantajlar Bölümü */}
-      <section className="max-w-6xl mx-auto py-16 px-6 sm:px-12 lg:px-24 text-center">
-        <h2 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-indigo-500 dark:from-teal-300 dark:to-indigo-300 mb-8">
-          Projelerimin Avantajları
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* SEO Optimizasyonu */}
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center justify-center mb-4">
-              <FaSearch className="text-4xl text-indigo-500 dark:text-indigo-300" />
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
+          {/* React */}
+          <div className="group relative bg-gradient-to-r from-blue-500 to-teal-500 dark:from-blue-400 dark:to-teal-400 shadow-lg rounded-lg p-6 flex flex-col items-center transform transition duration-500 hover:scale-105">
+            <FaReact className="text-5xl text-white group-hover:animate-spin" />
+            <p className="mt-4 text-lg font-semibold text-white">React</p>
+            <div className="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center rounded-lg">
+              <p className="text-sm text-white px-4">
+                React, modern kullanıcı arayüzleri geliştirmek için kullanılan
+                güçlü bir JavaScript kütüphanesidir.
+              </p>
             </div>
-            <h3 className="text-xl font-semibold text-indigo-500 dark:text-indigo-300 mb-4">
-              SEO Optimizasyonu
-            </h3>
-            <p className="text-gray-700 dark:text-gray-300">
-              Projem, arama motorlarında üst sıralarda yer almak için optimize
-              edilmiştir. Hızlı yükleme süreleri, temiz kod yapısı ve meta
-              etiketler sayesinde daha fazla görünürlük sağlar.
-            </p>
           </div>
 
-          {/* Hızlı Performans */}
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center justify-center mb-4">
-              <FaBolt className="text-4xl text-teal-500 dark:text-teal-300" />
+          {/* Next.js */}
+          <div className="group relative bg-gradient-to-r from-gray-800 to-black dark:from-gray-700 dark:to-gray-900 shadow-lg rounded-lg p-6 flex flex-col items-center transform transition duration-500 hover:scale-105">
+            <RiNextjsFill className="text-5xl text-white group-hover:animate-pulse" />
+            <p className="mt-4 text-lg font-semibold text-white">Next.js</p>
+            <div className="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center rounded-lg">
+              <p className="text-sm text-white px-4">
+                Next.js, React tabanlı projeler için sunucu tarafı render ve
+                statik site oluşturma özellikleri sunar.
+              </p>
             </div>
-            <h3 className="text-xl font-semibold text-teal-500 dark:text-teal-300 mb-4">
-              Hızlı Performans
-            </h3>
-            <p className="text-gray-700 dark:text-gray-300">
-              Next.js ve Tailwind CSS gibi modern teknolojiler sayesinde projem
-              hızlı ve verimli çalışır. Kullanıcı deneyimini artırmak için
-              optimize edilmiş bileşenler kullanıyorum.
-            </p>
           </div>
 
-          {/* Responsive Tasarım */}
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center justify-center mb-4">
-              <FaMobileAlt className="text-4xl text-blue-500 dark:text-blue-300" />
-            </div>
-            <h3 className="text-xl font-semibold text-blue-500 dark:text-blue-300 mb-4">
-              Responsive Tasarım
-            </h3>
-            <p className="text-gray-700 dark:text-gray-300">
-              Projem, tüm cihazlarda mükemmel bir kullanıcı deneyimi sunar.
-              Mobil, tablet ve masaüstü cihazlar için optimize edilmiş bir
-              tasarıma sahiptir.
+          {/* Tailwind CSS */}
+          <div className="group relative bg-gradient-to-r from-blue-400 to-blue-600 dark:from-blue-300 dark:to-blue-500 shadow-lg rounded-lg p-6 flex flex-col items-center transform transition duration-500 hover:scale-105">
+            <RiTailwindCssFill className="text-5xl text-white group-hover:animate-bounce" />
+            <p className="mt-4 text-lg font-semibold text-white">
+              Tailwind CSS
             </p>
+            <div className="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center rounded-lg">
+              <p className="text-sm text-white px-4">
+                Tailwind CSS, hızlı ve özelleştirilebilir tasarımlar oluşturmak
+                için kullanılan bir CSS framework&apos;üdür.
+              </p>
+            </div>
           </div>
 
-          {/* Modern Teknolojiler */}
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center justify-center mb-4">
-              <FaCogs className="text-4xl text-purple-500 dark:text-purple-300" />
+          {/* JavaScript */}
+          <div className="group relative bg-gradient-to-r from-yellow-400 to-yellow-500 dark:from-yellow-300 dark:to-yellow-400 shadow-lg rounded-lg p-6 flex flex-col items-center transform transition duration-500 hover:scale-105">
+            <IoLogoJavascript className="text-5xl text-white group-hover:animate-wiggle" />
+            <p className="mt-4 text-lg font-semibold text-white">JavaScript</p>
+            <div className="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center rounded-lg">
+              <p className="text-sm text-white px-4">
+                JavaScript, web uygulamalarına dinamik özellikler kazandırmak
+                için kullanılan bir programlama dilidir.
+              </p>
             </div>
-            <h3 className="text-xl font-semibold text-purple-500 dark:text-purple-300 mb-4">
-              Modern Teknolojiler
-            </h3>
-            <p className="text-gray-700 dark:text-gray-300">
-              React, Next.js ve Tailwind CSS gibi modern teknolojiler kullanarak
-              performanslı ve ölçeklenebilir projeler geliştiriyorum.
-            </p>
           </div>
 
-          {/* Kolay Yönetim */}
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center justify-center mb-4">
-              <FaTools className="text-4xl text-green-500 dark:text-green-300" />
+          {/* TypeScript */}
+          <div className="group relative bg-gradient-to-r from-blue-600 to-blue-800 dark:from-blue-500 dark:to-blue-700 shadow-lg rounded-lg p-6 flex flex-col items-center transform transition duration-500 hover:scale-105">
+            <SiTypescript className="text-5xl text-white group-hover:animate-spin" />
+            <p className="mt-4 text-lg font-semibold text-white">TypeScript</p>
+            <div className="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center rounded-lg">
+              <p className="text-sm text-white px-4">
+                TypeScript, JavaScript&apos;in güçlü bir tip sistemiyle
+                genişletilmiş halidir.
+              </p>
             </div>
-            <h3 className="text-xl font-semibold text-green-500 dark:text-green-300 mb-4">
-              Kolay Yönetim
-            </h3>
-            <p className="text-gray-700 dark:text-gray-300">
-              Projem, temiz kod yapısı ve modüler bileşenler sayesinde kolayca
-              yönetilebilir ve güncellenebilir.
-            </p>
           </div>
 
-          {/* Güvenlik */}
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center justify-center mb-4">
-              <FaShieldAlt className="text-4xl text-red-500 dark:text-red-300" />
+          {/* HTML5 */}
+          <div className="group relative bg-gradient-to-r from-orange-500 to-red-500 dark:from-orange-400 dark:to-red-400 shadow-lg rounded-lg p-6 flex flex-col items-center transform transition duration-500 hover:scale-105">
+            <FaHtml5 className="text-5xl text-white group-hover:animate-bounce" />
+            <p className="mt-4 text-lg font-semibold text-white">HTML5</p>
+            <div className="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center rounded-lg">
+              <p className="text-sm text-white px-4">
+                HTML5, web sayfalarının yapısını oluşturmak için kullanılan en
+                son HTML standardıdır.
+              </p>
             </div>
-            <h3 className="text-xl font-semibold text-red-500 dark:text-red-300 mb-4">
-              Güvenlik
-            </h3>
-            <p className="text-gray-700 dark:text-gray-300">
-              Modern güvenlik standartları ve en iyi uygulamalar sayesinde
-              projem, kullanıcı verilerini korumak için güvenli bir altyapıya
-              sahiptir.
-            </p>
+          </div>
+
+          {/* CSS3 */}
+          <div className="group relative bg-gradient-to-r from-blue-500 to-blue-700 dark:from-blue-400 dark:to-blue-600 shadow-lg rounded-lg p-6 flex flex-col items-center transform transition duration-500 hover:scale-105">
+            <FaCss3 className="text-5xl text-white group-hover:animate-spin" />
+            <p className="mt-4 text-lg font-semibold text-white">CSS3</p>
+            <div className="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center rounded-lg">
+              <p className="text-sm text-white px-4">
+                CSS3, web sayfalarının stilini ve düzenini kontrol etmek için
+                kullanılan en son CSS standardıdır.
+              </p>
+            </div>
+          </div>
+
+          {/* Node.js */}
+          <div className="group relative bg-gradient-to-r from-green-500 to-green-700 dark:from-green-400 dark:to-green-600 shadow-lg rounded-lg p-6 flex flex-col items-center transform transition duration-100 hover:scale-105">
+            <FaNode className="text-5xl text-white group-hover:animate-pulse" />
+            <p className="mt-4 text-lg font-semibold text-white">Node.js</p>
+            <div className="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center rounded-lg">
+              <p className="text-sm text-white px-4">
+                Node.js, JavaScript&apos;i sunucu tarafında çalıştırmak için
+                kullanılan bir çalışma ortamıdır.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Projects Section */}
-      <section className="max-w-8xl mx-auto py-12 px-4 text-center">
-        <h2 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-teal-500 dark:from-indigo-300 dark:to-teal-300 mb-8">
-          Son Projelerim
+      <section
+        id="projects"
+        className="max-w-6xl mx-auto py-16 px-6 sm:px-12 lg:px-24 text-center"
+      >
+        <h2 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-teal-500 dark:from-indigo-300 dark:to-teal-300 mb-8">
+          Projelerim
         </h2>
-        <div className="flex flex-wrap justify-center gap-6">
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 w-full sm:w-80 md:w-96">
+        <p className="text-lg sm:text-xl leading-relaxed text-gray-700 dark:text-gray-300 mb-12">
+          Projelerim hakkında detaylı bilgi almak için aşağıdaki bağlantılara
+          göz atabilirsiniz.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          {/* Proje 1 */}
+          <div className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+            <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4 group-hover:text-teal-500 transition duration-300">
+              Veteriner Website
+            </h3>
             <Image
               src="/project-1.png"
-              alt="Proje 1"
-              width={500}
-              height={300}
-              className="rounded-md object-cover w-full h-48"
+              alt="Proje 1 Görseli"
+              width={300}
+              height={200}
+              className="rounded-lg mb-4 object-cover group-hover:opacity-90 transition duration-300"
             />
-            <h3 className="text-xl font-semibold mt-4 text-indigo-500 dark:text-indigo-400">
-              Proje 1
-            </h3>
-            <p className="text-sm mt-2 text-gray-600 dark:text-gray-300">
-              Modern bir web uygulaması. React ve Tailwind ile geliştirilmiştir.
+            <p className="text-gray-700 dark:text-gray-300 mb-6 group-hover:text-gray-500 transition duration-300">
+              Bu proje, modern web teknolojileri kullanılarak geliştirilmiş bir
+              uygulamadır.
             </p>
+            <a
+              href="https://vet-website-project.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 rounded-lg font-semibold text-white bg-teal-500 hover:bg-teal-600 dark:bg-teal-400 dark:hover:bg-teal-500 transition"
+            >
+              Projeyi İncele
+            </a>
           </div>
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 w-full sm:w-80 md:w-96">
+
+          {/* Proje 2 */}
+          <div className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+            <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 group-hover:text-teal-500 transition duration-300">
+              Öğrenci Yurdu Website
+            </h3>
             <Image
               src="/project-2.png"
-              alt="Proje 2"
-              width={500}
-              height={300}
-              className="rounded-md object-cover w-full h-48"
+              alt="Proje 2 Görseli"
+              width={300}
+              height={200}
+              className="rounded-lg mb-8 object-cover group-hover:opacity-90 transition duration-300"
             />
-            <h3 className="text-xl font-semibold mt-4 text-indigo-500 dark:text-indigo-400">
-              Proje 2
-            </h3>
-            <p className="text-sm mt-2 text-gray-600 dark:text-gray-300">
-              E-ticaret platformu. Next.js ve Tailwind ile geliştirilmiştir.
+            <p className="text-gray-700 dark:text-gray-300 mb-6 group-hover:text-gray-500 transition duration-300">
+              Bu proje, kullanıcı dostu bir arayüz ve güçlü bir altyapı sunar.
             </p>
+            <a
+              href="https://dormitory-project-kappa.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 rounded-lg font-semibold text-white bg-teal-500 hover:bg-teal-600 dark:bg-teal-400 dark:hover:bg-teal-500 transition"
+            >
+              Projeyi İncele
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="max-w-4xl mx-auto py-12 px-4 text-center">
-        <h2 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-indigo-500 dark:from-teal-300 dark:to-indigo-300 mb-6">
-          İletişim
+      {/* Projelerimin Avantajları */}
+      <section
+        id="advantages"
+        className="max-w-6xl mx-auto py-16 px-6 sm:px-12 lg:px-24 text-center"
+      >
+        <h2 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-indigo-500 dark:from-teal-300 dark:to-indigo-300 mb-8">
+          Projelerimin Avantajları
         </h2>
-        <form className="space-y-6">
+        <p className="text-lg sm:text-xl leading-relaxed text-gray-700 dark:text-gray-300 mb-12">
+          Projelerimde sunduğum avantajlar, kullanıcı deneyimini ve performansı
+          ön planda tutar.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* SEO Optimizasyonu */}
+          <div className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+            <FaTools className="text-5xl text-teal-500 mb-4 group-hover:animate-bounce" />
+            <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2 group-hover:text-teal-500 transition duration-300">
+              SEO Optimizasyonu
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300 group-hover:text-gray-500 transition duration-300">
+              Projelerim arama motorlarında üst sıralarda yer alacak şekilde
+              optimize edilmiştir.
+            </p>
+          </div>
+
+          {/* Güvenlik */}
+          <div className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+            <FaShieldAlt className="text-5xl text-indigo-500 mb-4 group-hover:animate-pulse" />
+            <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2 group-hover:text-indigo-500 transition duration-300">
+              Güvenlik
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300 group-hover:text-gray-500 transition duration-300">
+              Projelerimde en güncel güvenlik standartları uygulanır.
+            </p>
+          </div>
+
+          {/* Son Teknoloji */}
+          <div className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+            <FaReact className="text-5xl text-blue-500 mb-4 group-hover:animate-pulse" />
+            <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2 group-hover:text-blue-500 transition duration-300">
+              Son Teknoloji
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300 group-hover:text-gray-500 transition duration-300">
+              Projelerimde en yeni ve modern teknolojiler kullanılır.
+            </p>
+          </div>
+
+          {/* Responsive Tasarım */}
+          <div className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+            <FaMobileAlt className="text-5xl text-green-500 mb-4 group-hover:animate-bounce" />
+            <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2 group-hover:text-green-500 transition duration-300">
+              Responsive Tasarım
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300 group-hover:text-gray-500 transition duration-300">
+              Tüm cihazlarda mükemmel bir kullanıcı deneyimi sunar.
+            </p>
+          </div>
+
+          {/* Performans */}
+          <div className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+            <FaBolt className="text-5xl text-yellow-500 mb-4 group-hover:animate-pulse" />
+            <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2 group-hover:text-yellow-500 transition duration-300">
+              Yüksek Performans
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300 group-hover:text-gray-500 transition duration-300">
+              Projelerim hızlı yükleme süreleri ve yüksek performans sunar.
+            </p>
+          </div>
+
+          {/* Teknik Destek */}
+          <div className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+            <FaPhone className="text-5xl text-red-500 mb-4 group-hover:animate-bounce" />
+            <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2 group-hover:text-red-500 transition duration-300">
+              Teknik Destek
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300 group-hover:text-gray-500 transition duration-300">
+              Projelerim için sürekli teknik destek ve güncellemeler sağlıyorum.
+            </p>
+          </div>
+        </div>
+      </section>
+      {/* Contact Section */}
+      <section
+        id="contact"
+        className="max-w-4xl mx-auto py-16 px-6 sm:px-12 lg:px-24 text-center"
+      >
+        <div className="flex justify-center items-center gap-3">
           <div>
+            <h2 className="text-4xl sm:text-5xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-indigo-500 dark:from-teal-300 dark:to-indigo-300 mb-12 animate-fade-in">
+              İletişim
+            </h2>
+          </div>
+          <FaPhone className=" text-gray-600 dark:text-white" size={40} />
+        </div>
+        <span className="neon-line"></span>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-6 bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 border border-gray-200 dark:border-gray-700 animate-slide-up"
+        >
+          <div className="group">
             <label
               htmlFor="name"
-              className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
+              className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300 group-hover:text-teal-500 transition duration-300"
             >
               İsim
             </label>
-            <Input
+            <input
               id="name"
               type="text"
               placeholder="Adınızı girin"
-              className="w-full p-3 rounded-md bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400"
+              {...register("name", { required: "İsim zorunludur." })}
+              className={`w-full p-3 rounded-md bg-gray-100 dark:bg-gray-900 border ${
+                errors.name
+                  ? "border-red-500 focus:ring-red-500"
+                  : "border-gray-300 dark:border-gray-700 focus:ring-teal-500"
+              } focus:outline-none transition duration-300 group-hover:shadow-lg`}
             />
           </div>
-          <div>
+          <div className="group">
             <label
               htmlFor="email"
-              className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
+              className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300 group-hover:text-indigo-500 transition duration-300"
             >
               E-posta
             </label>
-            <Input
+            <input
               id="email"
               type="email"
               placeholder="E-posta adresinizi girin"
-              className="w-full p-3 rounded-md bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400"
+              {...register("email", {
+                required: "E-posta zorunludur.",
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  message: "Geçerli bir e-posta adresi girin.",
+                },
+              })}
+              className={`w-full p-3 rounded-md bg-gray-100 dark:bg-gray-900 border ${
+                errors.email
+                  ? "border-red-500 focus:ring-red-500"
+                  : "border-gray-300 dark:border-gray-700 focus:ring-indigo-500"
+              } focus:outline-none transition duration-300 group-hover:shadow-lg`}
             />
+            {errors.email && (
+              <p className="text-sm text-red-500 mt-2">
+                {errors.email?.message &&
+                  typeof errors.email.message === "string" && (
+                    <p className="text-sm text-red-500 mt-2">
+                      {errors.email.message}
+                    </p>
+                  )}
+              </p>
+            )}
           </div>
-          <div>
+          <div className="group">
             <label
               htmlFor="message"
-              className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
+              className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300 group-hover:text-blue-500 transition duration-300"
             >
               Mesaj
             </label>
@@ -347,50 +478,29 @@ export default function Home() {
               id="message"
               rows={4}
               placeholder="Mesajınızı yazın"
-              className="w-full p-3 rounded-md bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400"
+              {...register("message", { required: "Mesaj zorunludur." })}
+              className={`w-full p-3 rounded-md bg-gray-100 dark:bg-gray-900 border ${
+                errors.message
+                  ? "border-red-500 focus:ring-red-500"
+                  : "border-gray-300 dark:border-gray-700 focus:ring-blue-500"
+              } focus:outline-none transition duration-300 group-hover:shadow-lg`}
             ></textarea>
+            {errors.message && (
+              <p className="text-sm text-red-500 mt-2">
+                {typeof errors.message.message === "string" &&
+                  errors.message.message}
+              </p>
+            )}
           </div>
-          <Button className="px-6 py-3 rounded-lg font-semibold text-white bg-teal-500 hover:bg-teal-600 dark:bg-teal-400 dark:hover:bg-teal-500 transition">
-            Gönder
-          </Button>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full py-3 px-6 rounded-lg font-semibold text-white bg-teal-500 hover:bg-teal-600 dark:bg-teal-400 dark:hover:bg-teal-500 transition disabled:opacity-50 animate-bounce-once"
+          >
+            {isSubmitting ? "Gönderiliyor..." : "Gönder"}
+          </button>
         </form>
       </section>
-
-      {/* Footer Section */}
-      <footer className="bg-gray-800 dark:bg-gray-900 text-white py-6">
-        <div className="max-w-6xl mx-auto text-center">
-          <p className="text-sm">
-            &copy; {new Date().getFullYear()} Aypars Çelik. Tüm hakları
-            saklıdır.
-          </p>
-          <div className="mt-4 flex justify-center space-x-6">
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-teal-400 transition"
-            >
-              <FaGithub size={24} />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-teal-400 transition"
-            >
-              <FaLinkedin size={24} />
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-teal-400 transition"
-            >
-              <FaTwitter size={24} />
-            </a>
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }

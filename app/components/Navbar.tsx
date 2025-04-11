@@ -17,19 +17,19 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { href: "#", label: "Anasayfa" },
-    { href: "#projelerim", label: "Projelerim" },
-    { href: "#yeteneklerim", label: "Yeteneklerim" },
-    { href: "#iletisim", label: "İletişim" },
+    { href: "/", label: "Anasayfa" },
+    { href: "/projects", label: "Projelerim" },
+    { href: "/skills", label: "Yeteneklerim" }, // Skills.tsx'e yönlendirme
+    { href: "/contact", label: "İletişim" },
   ];
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-[#0D0D0D] text-white shadow-md z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 md:justify-center md:gap-24">
         {/* Logo */}
         <Link
-          href="#"
-          className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00FFFF] to-[#FF00FF]"
+          href="/"
+          className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00FFFF] to-[#c771c7]"
         >
           Aypars Çelik
         </Link>

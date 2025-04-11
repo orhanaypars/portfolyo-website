@@ -332,13 +332,15 @@
 .neon-line {
   display: block;
   margin: 0 auto;
-  margin-top: 10px;
+  margin-top: 0px;
+  margin-bottom: 35px;
   /* Çizginin yazıya olan mesafesi */
-  width: 80%;
+  width: 60%;
   /* Çizginin genişliği */
   height: 4px;
   /* Çizginin kalınlığı */
   background: #00FFFF;
+  background: linear-gradient(to right, #00FFFF, #c771c7);
   /* Neon mavi renk */
   box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF;
   animation: neon-glow 2s infinite alternate;
