@@ -260,10 +260,10 @@ export default function Home() {
           Projelerim hakkında detaylı bilgi almak için aşağıdaki bağlantılara
           göz atabilirsiniz.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Proje 1 */}
           <div className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl">
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4 group-hover:text-teal-500 transition duration-300">
+            <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-blue-500 group-hover:from-teal-500 group-hover:to-indigo-500 transition duration-300 mb-10">
               Veteriner Website
             </h3>
             <Image
@@ -289,7 +289,7 @@ export default function Home() {
 
           {/* Proje 2 */}
           <div className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl">
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 group-hover:text-teal-500 transition duration-300">
+            <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-pink-500  mb-10 group-hover:from-teal-500 group-hover:to-indigo-500 transition duration-300">
               Öğrenci Yurdu Website
             </h3>
             <Image
@@ -304,6 +304,31 @@ export default function Home() {
             </p>
             <a
               href="https://dormitory-project-kappa.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 rounded-lg font-semibold text-white bg-teal-500 hover:bg-teal-600 dark:bg-teal-400 dark:hover:bg-teal-500 transition"
+            >
+              Projeyi İncele
+            </a>
+          </div>
+
+          {/* Proje 3 */}
+          <div className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+            <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800  mb-4 group-hover:from-teal-500 group-hover:to-indigo-500 transition duration-300 mb-10">
+              Sosyal Medya Platformu
+            </h3>
+            <Image
+              src="/project-3.png"
+              alt="Proje 3 Görseli"
+              width={300}
+              height={200}
+              className="rounded-lg mb-4 object-cover group-hover:opacity-90 transition duration-300"
+            />
+            <p className="text-gray-700 dark:text-gray-300 mb-6 group-hover:text-gray-500 transition duration-300">
+              Kullanıcıların içerik paylaşabileceği bir sosyal medya platformu.
+            </p>
+            <a
+              href="https://social-media-project.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 rounded-lg font-semibold text-white bg-teal-500 hover:bg-teal-600 dark:bg-teal-400 dark:hover:bg-teal-500 transition"

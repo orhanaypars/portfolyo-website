@@ -28,23 +28,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr" suppressHydrationWarning>
-      <body
-        className={`${lato.className} bg-background text-foreground antialiased transition-colors duration-200 dark:bg-background-dark dark:text-foreground-dark scroll-smooth`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
+      <head>
+        openai-domain-verification=dv-LQX83i3trodOPyf7zbXL1gYR
+        <body
+          className={`${lato.className} bg-background text-foreground antialiased transition-colors duration-200 dark:bg-background-dark dark:text-foreground-dark scroll-smooth`}
         >
-          <Toaster position="top-right" richColors />
-          <div className="min-h-screen">
-            <Navbar />
-            {children}
-          </div>
-          <Footer />
-        </ThemeProvider>
-      </body>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Toaster position="top-right" richColors />
+            <div className="min-h-screen">
+              <Navbar />
+              {children}
+            </div>
+            <Footer />
+          </ThemeProvider>
+        </body>
+      </head>
     </html>
   );
 }
