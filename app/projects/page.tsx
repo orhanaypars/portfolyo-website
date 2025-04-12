@@ -13,45 +13,93 @@ function ProjectsPage() {
   return (
     <main className="max-w-7xl mx-auto py-16 px-6 sm:px-12 lg:px-24 my-15">
       {/* Projelerim Bölümü */}
-      <section className="text-center mb-16">
-        <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-indigo-500 dark:from-teal-300 dark:to-indigo-300 mb-8">
+      {/* Projects Section */}
+      <section
+        id="projects"
+        className="max-w-6xl mx-auto py-16 px-6 sm:px-12 lg:px-24 text-center"
+      >
+        <h2 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-teal-500 dark:from-indigo-300 dark:to-teal-300 mb-8">
           Projelerim
-          <span className="neon-line"></span>
-        </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        </h2>
+        <p className="text-lg sm:text-xl leading-relaxed text-gray-700 dark:text-gray-300 mb-12">
+          Projelerim hakkında detaylı bilgi almak için aşağıdaki bağlantılara
+          göz atabilirsiniz.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Proje 1 */}
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+          <div className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+            <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-blue-500 group-hover:from-teal-500 group-hover:to-indigo-500 transition duration-300 mb-10">
+              Veteriner Website
+            </h3>
             <Image
               src="/project-1.png"
-              alt="Proje 1"
-              width={500}
-              height={300}
-              className="rounded-md object-cover w-full h-48"
+              alt="Proje 1 Görseli"
+              width={300}
+              height={200}
+              className="rounded-lg mb-4 object-cover group-hover:opacity-90 transition duration-300"
             />
-            <h3 className="text-xl font-semibold mt-4 text-indigo-500 dark:text-indigo-300">
-              Proje 1
-            </h3>
-            <p className="text-sm mt-2 text-gray-700 dark:text-gray-300">
-              Modern bir web uygulaması. React ve Tailwind CSS ile
-              geliştirilmiştir.
+            <p className="text-gray-700 dark:text-gray-300 mb-6 group-hover:text-gray-500 transition duration-300">
+              Bu proje, modern web teknolojileri kullanılarak geliştirilmiş bir
+              uygulamadır.
             </p>
+            <a
+              href="https://vet-website-project.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 rounded-lg font-semibold text-white bg-teal-500 hover:bg-teal-600 dark:bg-teal-400 dark:hover:bg-teal-500 transition"
+            >
+              Projeyi İncele
+            </a>
           </div>
 
           {/* Proje 2 */}
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+          <div className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+            <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-pink-500  mb-10 group-hover:from-teal-500 group-hover:to-indigo-500 transition duration-300">
+              Öğrenci Yurdu Website
+            </h3>
             <Image
               src="/project-2.png"
-              alt="Proje 2"
-              width={500}
-              height={300}
-              className="rounded-md object-cover w-full h-48"
+              alt="Proje 2 Görseli"
+              width={300}
+              height={200}
+              className="rounded-lg mb-8 object-cover group-hover:opacity-90 transition duration-300"
             />
-            <h3 className="text-xl font-semibold mt-4 text-indigo-500 dark:text-indigo-300">
-              Proje 2
-            </h3>
-            <p className="text-sm mt-2 text-gray-700 dark:text-gray-300">
-              E-ticaret platformu. Next.js ve Tailwind CSS ile geliştirilmiştir.
+            <p className="text-gray-700 dark:text-gray-300 mb-6 group-hover:text-gray-500 transition duration-300">
+              Bu proje, kullanıcı dostu bir arayüz ve güçlü bir altyapı sunar.
             </p>
+            <a
+              href="https://dormitory-project-kappa.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 rounded-lg font-semibold text-white bg-teal-500 hover:bg-teal-600 dark:bg-teal-400 dark:hover:bg-teal-500 transition"
+            >
+              Projeyi İncele
+            </a>
+          </div>
+
+          {/* Proje 3 */}
+          <div className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+            <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800  mb-4 group-hover:from-teal-500 group-hover:to-indigo-500 transition duration-300 mb-10">
+              Sosyal Medya Platformu
+            </h3>
+            <Image
+              src="/project-3.png"
+              alt="Proje 3 Görseli"
+              width={300}
+              height={200}
+              className="rounded-lg mb-4 object-cover group-hover:opacity-90 transition duration-300"
+            />
+            <p className="text-gray-700 dark:text-gray-300 mb-6 group-hover:text-gray-500 transition duration-300">
+              Kullanıcıların içerik paylaşabileceği bir sosyal medya platformu.
+            </p>
+            <a
+              href="https://social-media-project.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 rounded-lg font-semibold text-white bg-teal-500 hover:bg-teal-600 dark:bg-teal-400 dark:hover:bg-teal-500 transition"
+            >
+              Projeyi İncele
+            </a>
           </div>
         </div>
       </section>
