@@ -93,7 +93,7 @@ function ProjectsPage() {
               Kullanıcıların içerik paylaşabileceği bir sosyal medya platformu.
             </p>
             <a
-              href="https://social-media-project.vercel.app/"
+              href="https://social-media-project-six.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 rounded-lg font-semibold text-white bg-teal-500 hover:bg-teal-600 dark:bg-teal-400 dark:hover:bg-teal-500 transition"
