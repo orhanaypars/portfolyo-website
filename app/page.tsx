@@ -323,10 +323,39 @@ export default function Home() {
             Projeyi İncele
           </a>
         </div>
+<<<<<<< HEAD
       );
     })}
   </div>
 </section>
+=======
+      </section>
+{/* Proje 4  */}
+       <div className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+            <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-amber-500 group-hover:from-teal-500 group-hover:to-indigo-500 transition duration-300 mb-10">
+              Hotel website project
+            </h3>
+            <Image
+              src="/project-1.png"
+              alt="Proje 4 Görseli"
+              width={300}
+              height={200}
+              className="rounded-lg mb-4 object-cover group-hover:opacity-90 transition duration-300"
+            />
+            <p className="text-gray-700 dark:text-gray-300 mb-6 group-hover:text-gray-500 transition duration-300">
+              Bu proje, modern web teknolojileri kullanılarak geliştirilmiş bir
+              otel websitesidir.
+            </p>
+            <a
+              href="https://hotel-website-nu-seven.vercel.app/en/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 rounded-lg font-semibold text-white bg-teal-500 hover:bg-teal-600 dark:bg-teal-400 dark:hover:bg-teal-500 transition"
+            >
+              Projeyi İncele
+            </a>
+          </div>
+>>>>>>> 8f25e26662e3c19e4b060b5ff14eb7fc46703324
       {/* Projelerimin Avantajları */}
       <section
         id="advantages"
