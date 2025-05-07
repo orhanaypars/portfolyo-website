@@ -25,6 +25,33 @@ interface ContactFormData {
   message: string;
 }
 
+const projects = [
+  {
+    title: 'Veteriner Website',
+    description: 'Bu proje, modern web teknolojileri kullanılarak geliştirilmiş bir uygulamadır.',
+    image: '/project-1.png',
+    link: 'https://vet-website-project.vercel.app/'
+  },
+  {
+    title: 'Öğrenci Yurdu Website',
+    description: 'Bu proje, kullanıcı dostu bir arayüz ve güçlü bir altyapı sunar.',
+    image: '/project-2.png',
+    link: 'https://dormitory-project-kappa.vercel.app/'
+  },
+  {
+    title: 'Sosyal Medya Platformu',
+    description: 'Kullanıcıların içerik paylaşabileceği bir sosyal medya platformu.',
+    image: '/project-3.png',
+    link: 'https://social-media-project-six.vercel.app/'
+  },
+  {
+    title: 'Otel Website',
+    description: 'Bu proje, modern web teknolojileri kullanılarak geliştirilmiş bir otel websitesidir.',
+    image: '/project4.png',
+    link: 'https://hotel-website-nu-seven.vercel.app/en'
+  }
+];
+
 export default function Home() {
   const {
     register,
@@ -54,7 +81,6 @@ export default function Home() {
       });
     } catch (error) {
       console.error(error);
-
       toast.error("Mesaj gönderilemedi. Lütfen tekrar deneyin.", {
         style: {
           backgroundColor: "#ef4444",
@@ -63,39 +89,10 @@ export default function Home() {
       });
     }
   };
-
-  const projects = [
-    {
-      title: 'Veteriner Website',
-      description: 'Bu proje, modern web teknolojileri kullanılarak geliştirilmiş bir uygulamadır.',
-      image: '/project-1.png',
-      link: 'https://vet-website-project.vercel.app/'
-    },
-    {
-      title: 'Öğrenci Yurdu Website',
-      description: 'Bu proje, kullanıcı dostu bir arayüz ve güçlü bir altyapı sunar.',
-      image: '/project-2.png',
-      link: 'https://dormitory-project-kappa.vercel.app/'
-    },
-    {
-      title: 'Sosyal Medya Platformu',
-      description: 'Kullanıcıların içerik paylaşabileceği bir sosyal medya platformu.',
-      image: '/project-3.png',
-      link: 'https://social-media-project-six.vercel.app/'
-    },
-    {
-      title: 'Otel website project',
-      description: 'Bu proje, modern web teknolojileri kullanılarak geliştirilmiş bir otel websitesidir.',
-      image: '/project4.png',
-      link: 'https://hotel-website-nu-seven.vercel.app/en'
-    }
-  ];
-
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-100 via-gray-200 to-gray-300 dark:from-gray-800 dark:via-gray-900 dark:to-black text-gray-900 dark:text-gray-100 overflow-x-hidden">
       {/* Hero Section */}
       <section className="relative flex flex-col items-center justify-center h-[90vh] text-center px-6 sm:px-12 lg:px-24 bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-white">
-        {/* İçerik */}
         <h1 className="text-5xl md:text-6xl lg:text-8xl font-semibold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-indigo-500 dark:from-[#c771c7] dark:to-[#00FFFF]">
           Aypars Çelik
           <span className="neon-line"></span>
@@ -145,15 +142,15 @@ export default function Home() {
           </div>
           <div className="text-left">
             <p className="text-lg sm:text-xl leading-relaxed mb-6 text-gray-700 dark:text-gray-300">
-              Merhaba, ben{" "}
+              Merhaba, ben {" "}
               <span className="font-bold text-indigo-500 dark:text-indigo-300">
                 Aypars Çelik
               </span>
               . Kullanıcı deneyimini ön planda tutan, modern web teknolojilerine
-              tutkulu bir{" "}
+              tutkulu bir {" "}
               <span className="font-bold text-teal-500 dark:text-teal-300">
                 Full Stack Developer
-              </span>{" "}
+              </span>
               olarak çalışıyorum.
             </p>
             <p className="text-lg sm:text-xl leading-relaxed mb-6 text-gray-700 dark:text-gray-300">
@@ -186,7 +183,6 @@ export default function Home() {
               </p>
             </div>
           </div>
-
           {/* Next.js */}
           <div className="group relative bg-gradient-to-r from-gray-800 to-black dark:from-gray-700 dark:to-gray-900 shadow-lg rounded-lg p-6 flex flex-col items-center transform transition duration-500 hover:scale-105">
             <RiNextjsFill className="text-5xl text-white group-hover:animate-pulse" />
@@ -198,13 +194,10 @@ export default function Home() {
               </p>
             </div>
           </div>
-
           {/* Tailwind CSS */}
           <div className="group relative bg-gradient-to-r from-blue-400 to-blue-600 dark:from-blue-300 dark:to-blue-500 shadow-lg rounded-lg p-6 flex flex-col items-center transform transition duration-500 hover:scale-105">
             <RiTailwindCssFill className="text-5xl text-white group-hover:animate-bounce" />
-            <p className="mt-4 text-lg font-semibold text-white">
-              Tailwind CSS
-            </p>
+            <p className="mt-4 text-lg font-semibold text-white">Tailwind CSS</p>
             <div className="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center rounded-lg">
               <p className="text-sm text-white px-4">
                 Tailwind CSS, hızlı ve özelleştirilebilir tasarımlar oluşturmak
@@ -212,7 +205,6 @@ export default function Home() {
               </p>
             </div>
           </div>
-
           {/* JavaScript */}
           <div className="group relative bg-gradient-to-r from-yellow-400 to-yellow-500 dark:from-yellow-300 dark:to-yellow-400 shadow-lg rounded-lg p-6 flex flex-col items-center transform transition duration-500 hover:scale-105">
             <IoLogoJavascript className="text-5xl text-white group-hover:animate-wiggle" />
@@ -224,7 +216,6 @@ export default function Home() {
               </p>
             </div>
           </div>
-
           {/* TypeScript */}
           <div className="group relative bg-gradient-to-r from-blue-600 to-blue-800 dark:from-blue-500 dark:to-blue-700 shadow-lg rounded-lg p-6 flex flex-col items-center transform transition duration-500 hover:scale-105">
             <SiTypescript className="text-5xl text-white group-hover:animate-spin" />
@@ -236,7 +227,6 @@ export default function Home() {
               </p>
             </div>
           </div>
-
           {/* HTML5 */}
           <div className="group relative bg-gradient-to-r from-orange-500 to-red-500 dark:from-orange-400 dark:to-red-400 shadow-lg rounded-lg p-6 flex flex-col items-center transform transition duration-500 hover:scale-105">
             <FaHtml5 className="text-5xl text-white group-hover:animate-bounce" />
@@ -248,7 +238,6 @@ export default function Home() {
               </p>
             </div>
           </div>
-
           {/* CSS3 */}
           <div className="group relative bg-gradient-to-r from-blue-500 to-blue-700 dark:from-blue-400 dark:to-blue-600 shadow-lg rounded-lg p-6 flex flex-col items-center transform transition duration-500 hover:scale-105">
             <FaCss3 className="text-5xl text-white group-hover:animate-spin" />
@@ -260,7 +249,6 @@ export default function Home() {
               </p>
             </div>
           </div>
-
           {/* Node.js */}
           <div className="group relative bg-gradient-to-r from-green-500 to-green-700 dark:from-green-400 dark:to-green-600 shadow-lg rounded-lg p-6 flex flex-col items-center transform transition duration-100 hover:scale-105">
             <FaNode className="text-5xl text-white group-hover:animate-pulse" />
@@ -276,91 +264,48 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section
-  id="projects"
-  className="max-w-7xl mx-auto py-16 px-6 sm:px-12 lg:px-24 text-center"
->
-  <h2 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-teal-500 dark:from-indigo-300 dark:to-teal-300 mb-8">
-    Projelerim
-  </h2>
-  <p className="text-lg sm:text-xl leading-relaxed text-gray-700 dark:text-gray-300 mb-12">
-    Projelerim hakkında detaylı bilgi almak için aşağıdaki bağlantılara göz atabilirsiniz.
-  </p>
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-    {projects.map((project, index) => {
-      const gradients = [
-        "from-green-500 to-blue-500",
-        "from-purple-500 to-pink-500",
-        "from-yellow-500 to-orange-500",
-        "from-blue-800 to-amber-500",
-      ];
-      const gradient = gradients[index % gradients.length];
-      return (
-        <div
-          key={index}
-          className={`group bg-gradient-to-r ${gradient} shadow-lg rounded-lg p-6 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl`}
-        >
-          <h3 className="text-2xl font-bold text-white mb-6">
-            {project.title}
-          </h3>
-          <div className="w-full h-[200px] mb-6 relative">
-            <Image
-              src={project.image}
-              alt={`${project.title} Görseli`}
-              fill
-              className="rounded-lg object-cover group-hover:opacity-90 transition duration-300"
-            />
-          </div>
-          <p className="text-white mb-6 group-hover:opacity-80 transition duration-300">
-            {project.description}
-          </p>
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-3 rounded-lg font-semibold text-white bg-black bg-opacity-50 hover:bg-opacity-70 transition"
-          >
-            Projeyi İncele
-          </a>
-        </div>
-<<<<<<< HEAD
-      );
-    })}
-  </div>
-</section>
-=======
-      </section>
-{/* Proje 4  */}
-       <div className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl">
-            <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-amber-500 group-hover:from-teal-500 group-hover:to-indigo-500 transition duration-300 mb-10">
-              Hotel website project
-            </h3>
-            <Image
-              src="/project-1.png"
-              alt="Proje 4 Görseli"
-              width={300}
-              height={200}
-              className="rounded-lg mb-4 object-cover group-hover:opacity-90 transition duration-300"
-            />
-            <p className="text-gray-700 dark:text-gray-300 mb-6 group-hover:text-gray-500 transition duration-300">
-              Bu proje, modern web teknolojileri kullanılarak geliştirilmiş bir
-              otel websitesidir.
-            </p>
-            <a
-              href="https://hotel-website-nu-seven.vercel.app/en/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 rounded-lg font-semibold text-white bg-teal-500 hover:bg-teal-600 dark:bg-teal-400 dark:hover:bg-teal-500 transition"
+      <section id="projects" className="max-w-6xl mx-auto py-16 px-6 sm:px-12 lg:px-24 text-center">
+        <h2 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-teal-500 dark:from-indigo-300 dark:to-teal-300 mb-8">
+          Projelerim
+        </h2>
+        <p className="text-lg sm:text-xl leading-relaxed text-gray-700 dark:text-gray-300 mb-12">
+          Projelerim hakkında detaylı bilgi almak için aşağıdaki bağlantılara göz atabilirsiniz.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {projects.map((project, index) => (
+            <div
+              key={index}
+              className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl"
             >
-              Projeyi İncele
-            </a>
-          </div>
->>>>>>> 8f25e26662e3c19e4b060b5ff14eb7fc46703324
-      {/* Projelerimin Avantajları */}
-      <section
-        id="advantages"
-        className="max-w-6xl mx-auto py-16 px-6 sm:px-12 lg:px-24 text-center"
-      >
+              <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-blue-500 group-hover:from-teal-500 group-hover:to-indigo-500 transition duration-300 mb-10">
+                {project.title}
+              </h3>
+              <div className="w-full h-[200px] mb-6 relative">
+                <Image
+                  src={project.image}
+                  alt={`${project.title} Görseli`}
+                  fill
+                  className="rounded-lg object-cover group-hover:opacity-90 transition duration-300"
+                />
+              </div>
+              <p className="text-gray-700 dark:text-gray-300 mb-6 group-hover:text-gray-500 transition duration-300">
+                {project.description}
+              </p>
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 rounded-lg font-semibold text-white bg-teal-500 hover:bg-teal-600 dark:bg-teal-400 dark:hover:bg-teal-500 transition"
+              >
+                Projeyi İncele
+              </a>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Advantages Section */}
+      <section id="advantages" className="max-w-6xl mx-auto py-16 px-6 sm:px-12 lg:px-24 text-center">
         <h2 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-indigo-500 dark:from-teal-300 dark:to-indigo-300 mb-8">
           Projelerimin Avantajları
         </h2>
@@ -380,7 +325,6 @@ export default function Home() {
               optimize edilmiştir.
             </p>
           </div>
-
           {/* Güvenlik */}
           <div className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl">
             <FaShieldAlt className="text-5xl text-indigo-500 mb-4 group-hover:animate-pulse" />
@@ -391,7 +335,6 @@ export default function Home() {
               Projelerimde en güncel güvenlik standartları uygulanır.
             </p>
           </div>
-
           {/* Son Teknoloji */}
           <div className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl">
             <FaReact className="text-5xl text-blue-500 mb-4 group-hover:animate-pulse" />
@@ -402,7 +345,6 @@ export default function Home() {
               Projelerimde en yeni ve modern teknolojiler kullanılır.
             </p>
           </div>
-
           {/* Responsive Tasarım */}
           <div className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl">
             <FaMobileAlt className="text-5xl text-green-500 mb-4 group-hover:animate-bounce" />
@@ -413,7 +355,6 @@ export default function Home() {
               Tüm cihazlarda mükemmel bir kullanıcı deneyimi sunar.
             </p>
           </div>
-
           {/* Performans */}
           <div className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl">
             <FaBolt className="text-5xl text-yellow-500 mb-4 group-hover:animate-pulse" />
@@ -424,7 +365,6 @@ export default function Home() {
               Projelerim hızlı yükleme süreleri ve yüksek performans sunar.
             </p>
           </div>
-
           {/* Teknik Destek */}
           <div className="group bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:shadow-2xl">
             <FaPhone className="text-5xl text-red-500 mb-4 group-hover:animate-bounce" />
@@ -437,18 +377,16 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       {/* Contact Section */}
-      <section
-        id="contact"
-        className="max-w-4xl mx-auto py-16 px-6 sm:px-12 lg:px-24 text-center"
-      >
+      <section id="contact" className="max-w-4xl mx-auto py-16 px-6 sm:px-12 lg:px-24 text-center">
         <div className="flex justify-center items-center gap-3">
           <div>
             <h2 className="text-4xl sm:text-5xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-indigo-500 dark:from-teal-300 dark:to-indigo-300 mb-12 animate-fade-in">
               İletişim
             </h2>
           </div>
-          <FaPhone className=" text-gray-600 dark:text-white" size={40} />
+          <FaPhone className="text-gray-600 dark:text-white" size={40} />
         </div>
         <span className="neon-line"></span>
         <form
@@ -500,12 +438,7 @@ export default function Home() {
             />
             {errors.email && (
               <p className="text-sm text-red-500 mt-2">
-                {errors.email?.message &&
-                  typeof errors.email.message === "string" && (
-                    <p className="text-sm text-red-500 mt-2">
-                      {errors.email.message}
-                    </p>
-                  )}
+                {errors.email.message}
               </p>
             )}
           </div>
@@ -526,11 +459,10 @@ export default function Home() {
                   ? "border-red-500 focus:ring-red-500"
                   : "border-gray-300 dark:border-gray-700 focus:ring-blue-500"
               } focus:outline-none transition duration-300 group-hover:shadow-lg`}
-            ></textarea>
+            />
             {errors.message && (
               <p className="text-sm text-red-500 mt-2">
-                {typeof errors.message.message === "string" &&
-                  errors.message.message}
+                {errors.message.message}
               </p>
             )}
           </div>
